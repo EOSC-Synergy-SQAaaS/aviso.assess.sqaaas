@@ -1,0 +1,66 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ecmwf/aviso:
+      branch: master
+      repo: https://github.com/ecmwf/aviso
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ecmwf/aviso git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-coral-cuscus.sh
+        container: qc.acc_chewy-black-rottweiler
+  QC.Doc:
+    repos:
+      github.com/ecmwf/aviso find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-indigo-lionfish.sh
+        container: qc.doc_freaky-xanthic-warthog
+      github.com/ecmwf/aviso git:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-denim-kiwi.sh
+        container: qc.doc_hilly-firebrick-seahorse
+      github.com/ecmwf/aviso markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-cerulean-baboon.sh
+        container: qc.doc_whiny-cardinal-alligator
+      github.com/ecmwf/aviso restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-peach-frigatebird.sh
+        container: qc.doc_wheezy-chartreuse-mouse
+  QC.Lic:
+    repos:
+      github.com/ecmwf/aviso licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-emerald-buzzard.sh
+        container: qc.lic_hazy-teal-woodlouse
+  QC.Sec:
+    repos:
+      github.com/ecmwf/aviso bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-copper-barracuda.sh
+        container: qc.sec_zippy-heliotrope-chamois
+  QC.Sty:
+    repos:
+      github.com/ecmwf/aviso flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-orange-javanese.sh
+        container: qc.sty_goopy-tomato-affenpinscher
+      github.com/ecmwf/aviso jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-rose-lemming.sh
+        container: qc.sty_hasty-olivine-tetra
+  QC.Ver:
+    repos:
+      github.com/ecmwf/aviso get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-platinum-tzu.sh
+        container: qc.ver_leaky-chestnut-deer
+timeout: 5400
